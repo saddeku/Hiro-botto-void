@@ -8,31 +8,29 @@ import { ISimplifiedMessage } from '../../typings'
 export default class Command extends BaseCommand {
     constructor(client: WAClient, handler: MessageHandler) {
         super(client, handler, {
-            command: '',
-         
+            command: 'anime',
+            description: 'Will send you random anime image.',
+            category: 'weeb',
+            usage: `${client.config.prefix}anime`,
 
         })
     }
 
 
-
     run = async (M: ISimplifiedMessage): Promise<void> => {
 
+        const onefive = Math.floor(Math.random() * 145) + 1
 
+return void M.reply(await request.buffer(`https://media.publit.io/file/Twintails/${onefive}.jpg`),
 
-
-return void M.reply(await request.buffer('https://i.ibb.co/4MPHYT6/baka.jpg'),
 MessageType.image,
             undefined,
             undefined,
-            `*No such command! Baka*`
 
-
-)
-
+            `*💫 ~*`
+            )
 
     }
-
 
 
 

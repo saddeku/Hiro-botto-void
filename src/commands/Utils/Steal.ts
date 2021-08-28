@@ -12,12 +12,11 @@ export default class Command extends BaseCommand {
             description: 'Steals stickers',
             category: 'utils',
             usage: `${client.config.prefix}steal [(as caption | tag)[video | image]]`,
-            dm: true,
             baseXp: 30
         })
     }
 
     run = async (M: ISimplifiedMessage, parsedArgs: IParsedArgs): Promise<void> => {
-        return void M.reply("Command is under Development")
+        return void M.reply("Sorry I can't steal from Cute People yet-")
     }
 }

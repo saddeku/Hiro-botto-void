@@ -2,9 +2,6 @@ import chalk from 'chalk'
 import { join } from 'path'
 import BaseCommand from '../lib/BaseCommand'
 import WAClient from '../lib/WAClient'
-import request from '../lib/request'
-import { MessageType, Mimetype } from '@adiwajshing/baileys'
-import fs from 'fs'
 import { ICommand, IParsedArgs, ISimplifiedMessage } from '../typings'
 
 export default class MessageHandler {
@@ -15,14 +12,12 @@ export default class MessageHandler {
     handleMessage = async (M: ISimplifiedMessage): Promise<void> => {
         if (M.WAMessage.key.fromMe || M.from.includes('status')) return void null
         const { args, groupMetadata, sender } = M
-        if (M.groupMetadata) {
-            const group = await this.client.getGroupData(M.from)
-            if (group.mod && M.groupMetadata?.admins?.includes(this.client.user.jid)) this.moderate(M)
-        }
+        if (!M.groupMetadata && M.chat === 'dm') return void null;
+        if ((await this.client.getGroupData(M.from)).mod && M.groupMetadata?.admins?.includes(this.client.user.jid)) this.moderate(M)
         if (!args[0] || !args[0].startsWith(this.client.config.prefix))
             return void this.client.log(
                 `${chalk.blueBright('MSG')} from ${chalk.green(sender.username)} in ${chalk.cyanBright(
-                    groupMetadata?.subject || 'DM'
+                    groupMetadata?.subject
                 )}`
             )
         const cmd = args[0].slice(this.client.config.prefix.length).toLowerCase()
@@ -32,18 +27,7 @@ export default class MessageHandler {
                 sender.username
             )} in ${chalk.cyanBright(groupMetadata?.subject || 'DM')}`
         )
-        // const noCmd = 'No Command Found! Try using one from the help list.'
-        // if (!command) return void M.reply(await request.buffer('https://media.tenor.com/images/bdfa7ee2dd664119126e54c98d06a1f0/tenor.gif' ),MessageType.video,
-        // undefined,         
-        //    undefined,
-  
-        //       `${noCmd}`)
-
-        // if (!command) return void  this.client.sendMessage( M.from, { url: './src/lib/no-cmd.mp4' }, 
-        //         MessageType.video, 
-        //         { mimetype: Mimetype.gif, caption: "*NO SUCH COMMAND BAKA >.<*" }
-        //     )           
-      if (!command)  return void (await fs.readFileSync('./src/lib/no-cmd.mp4'), MessageType.video, Mimetype.gif, undefined,undefined, "*NO SUCH COMMAND BAKA >.<*"   )
+        if (!command) return void M.reply('BAKA,there is no such command! Try using one from the *.help* list.')
         const user = await this.client.getUser(M.sender.jid)
         if (user.ban) return void M.reply("You're Banned from using commands.")
         const state = await this.client.DB.disabledcommands.findOne({ command: command.config.command })
@@ -57,7 +41,7 @@ export default class MessageHandler {
                 await this.client.setXp(M.sender.jid, command.config.baseXp || 10, 50)
             }
         } catch (err) {
-            // return void this.client.log(err.message, true)
+            return void this.client.log(err.message, true)
         }
     }
 

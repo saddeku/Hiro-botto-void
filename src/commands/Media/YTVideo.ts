@@ -13,7 +13,6 @@ export default class Command extends BaseCommand {
             category: 'media',
             aliases: ['ytvideo'],
             usage: `${client.config.prefix}ytv [URL]`,
-            dm: true,
             baseXp: 10
         })
     }
@@ -23,10 +22,10 @@ export default class Command extends BaseCommand {
         const video = new YT(M.urls[0], 'video')
         if (!video.validateURL()) return void M.reply(`Provide a Valid YT URL`)
         const { videoDetails } = await video.getInfo()
-        M.reply('👾 sending...')
-        if (Number(videoDetails.lengthSeconds) > 1800)
-            return void M.reply('⚓ Cannot Download videos longer than 30 Minutes')
-        M.reply(await video.getBuffer(), MessageType.video).catch((reason: any) =>
+        M.reply('✨ sending...')
+        if (Number(videoDetails.lengthSeconds) > 900)
+            return void M.reply('⚓ Cannot Download videos longer than 15 Minutes')
+        M.reply(await video.getBuffer(), MessageType.video).catch((reason: Error) =>
             M.reply(`❌ an error occupered, Reason: ${reason}`)
         )
     }

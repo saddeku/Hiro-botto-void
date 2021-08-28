@@ -13,7 +13,6 @@ export default class Command extends BaseCommand {
             description: 'Downloads given spotify track and sends it as Audio',
             category: 'media',
             usage: `${client.config.prefix}spotify [URL]`,
-            dm: true,
             baseXp: 20,
             aliases: ['sp']
         })
@@ -36,7 +35,7 @@ export default class Command extends BaseCommand {
             caption
         ).catch((reason: any) => M.reply(`❌ an error occupered, Reason: ${reason}`))
         M.reply(await track.getAudio(), MessageType.audio).catch((reason: any) =>
-            M.reply(`❌ an error occupered, Reason: ${reason}`)
+            M.reply(`❌ an error occurred, Reason: ${reason}`)
         )
     }
 }

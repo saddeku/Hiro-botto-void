@@ -1,4 +1,4 @@
-import { MessageType, Mimetype } from '@adiwajshing/baileys'
+import { MessageType } from '@adiwajshing/baileys'
 import MessageHandler from '../../Handlers/MessageHandler'
 import BaseCommand from '../../lib/BaseCommand'
 import WAClient from '../../lib/WAClient'
@@ -12,8 +12,7 @@ export default class Command extends BaseCommand {
             description: 'Downloads given YT Video and sends it as Audio',
             category: 'media',
             aliases: ['ytaudio'],
-            usage: `${client.config.prefix}yta [URL]`,
-            dm: true,
+            usage: `${client.config.prefix}ytv [URL]`,
             baseXp: 20
         })
     }
@@ -22,9 +21,9 @@ export default class Command extends BaseCommand {
         if (!M.urls.length) return void M.reply('🔎 Provide the URL of the YT video you want to download')
         const audio = new YT(M.urls[0], 'audio')
         if (!audio.validateURL()) return void M.reply(`⚓ Provide a Valid YT URL`)
-        M.reply('👾 sending...')
-        M.reply(await audio.getBuffer(), MessageType.audio).catch((reason: any) =>
-            M.reply(`❌ an error occupered, Reason: ${reason}`)
+        M.reply('💫 sending...')
+        M.reply(await audio.getBuffer(), MessageType.audio).catch((reason: Error) =>
+            M.reply(`❌ an error occurred, Reason: ${reason}`)
         )
     }
 }

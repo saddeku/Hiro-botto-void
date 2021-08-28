@@ -10,11 +10,10 @@ export default class Command extends BaseCommand {
             description: 'Well....',
             category: 'misc',
             usage: `${client.config.prefix}hi`,
-            dm: true
         })
     }
 
     run = async (M: ISimplifiedMessage): Promise<void> => {
-        return void (await M.reply(`Hi ${M.sender.username}!`))
+        return void (await M.reply(`Helloo ${M.sender.username}!`))
     }
 }

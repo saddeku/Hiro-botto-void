@@ -13,7 +13,6 @@ export default class Command extends BaseCommand {
             description: 'Displays the help menu or shows the info of the command provided',
             category: 'general',
             usage: `${client.config.prefix}help (command_name)`,
-            dm: true,
             aliases: ['h']
         })
     }
@@ -32,7 +31,7 @@ export default class Command extends BaseCommand {
                     categories[info.config.category].push(info)
                 }
             }
-            let text = `👾 *Hiro's Command List* 👾\n\n`
+            let text = `✨ *Star's Command List* ✨\n\n`
             const keys = Object.keys(categories)
             for (const key of keys)
                 text += `${this.emojis[keys.indexOf(key)]} *${this.client.util.capitalize(key)}*\n❐ \`\`\`${categories[
@@ -40,9 +39,8 @@ export default class Command extends BaseCommand {
                 ]
                     .map((command) => command.config?.command)
                     .join(', ')}\`\`\`\n\n`
-            return void M.reply( await request.buffer('https://wallpapercave.com/wp/wp2475709.png'),  MessageType.image,            undefined,
-            undefined,
-
+            return void M.reply(
+                                
                 `${text} 🗃️ *Note: Use ${this.client.config.prefix}help <command_name> to view the command info*`
             )
         }

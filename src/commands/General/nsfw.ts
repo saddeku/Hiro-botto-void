@@ -4,34 +4,30 @@ import BaseCommand from '../../lib/BaseCommand'
 import request from '../../lib/request'
 import WAClient from '../../lib/WAClient'
 import { ISimplifiedMessage } from '../../typings'
+import  axios  from 'axios'
 
 export default class Command extends BaseCommand {
     constructor(client: WAClient, handler: MessageHandler) {
         super(client, handler, {
-            command: '',
-         
-
+            command: 'nsfw',
+            
+            
         })
     }
-
-
 
     run = async (M: ISimplifiedMessage): Promise<void> => {
 
 
+        const rnekol = ["waifu", "neko"];
+        const rnekolc = rnekol[Math.floor(Math.random() * rnekol.length)];
+        const neko = await axios.get('https://nekos.life/api/v2/img/' + rnekolc)
 
+return void M.reply(await request.buffer(neko.data.url), MessageType.image, undefined, undefined, `💫`)
 
-return void M.reply(await request.buffer('https://i.ibb.co/4MPHYT6/baka.jpg'),
-MessageType.image,
-            undefined,
-            undefined,
-            `*No such command! Baka*`
-
-
-)
 
 
     }
+
 
 
 

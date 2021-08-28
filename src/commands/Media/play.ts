@@ -14,7 +14,6 @@ export default class Command extends BaseCommand {
             category: 'media',
             aliases: ['music'],
             usage: `${client.config.prefix}play [term]`,
-            dm: true,
             baseXp: 30
         })
     }
@@ -26,20 +25,20 @@ export default class Command extends BaseCommand {
         if (!videos || videos.length <= 0) return void M.reply(`⚓ No Matching videos found for the term : *${term}*`)
         const audio = new YT(videos[0].url, 'audio')
         if (!audio.url) return
-        M.reply('👾 Sending...')
+        M.reply(' 💫  Sending...')
         this.client
             .sendMessage(M.from, await audio.getBuffer(), MessageType.audio, {
                 quoted: M.WAMessage,
                 contextInfo: {
                     externalAdReply: {
                         title: videos[0].title.substr(0, 30),
-                        body: `𝐻𝑒𝓇𝑒 𝒾𝓈 𝓎𝑜𝓊𝓇 𝓇𝑒𝓆𝓊𝑒𝓈𝓉𝑒𝒹 𝓈𝑜𝓃𝑔 𝒟𝒶𝓇𝓁𝒾𝓃𝑔`,
+                        body: `author : ${videos[0].author.name.substr(0, 20)}\nSent Via : 💫 Star`,
                         mediaType: 2,
                         thumbnailUrl: `https://i.ytimg.com/vi/${audio.id}/hqdefault.jpg`,
                         mediaUrl: audio.url
                     }
                 }
             })
-            .catch((reason: any) => M.reply(`❌ an error occupered, Reason: ${reason}`))
+            .catch((reason: Error) => M.reply(`❌ an error occupered, Reason: ${reason}`))
     }
 }
