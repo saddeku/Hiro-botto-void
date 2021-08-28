@@ -25,7 +25,7 @@ export default class Command extends BaseCommand {
             MessageType.image,
             undefined,
             undefined,
-            'Here you go. - feature via ✨*Star*✨'
+            'Here you go. - feature via 🖤*Deku*🖤'
         )
     }
 }
