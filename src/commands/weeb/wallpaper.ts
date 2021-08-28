@@ -24,7 +24,7 @@ export default class Command extends BaseCommand {
         const rnekolc = rnekol[Math.floor(Math.random() * rnekol.length)];
         const neko = await axios.get('https://nekos.life/api/v2/img/' + rnekolc)
 
-return void M.reply(await request.buffer(neko.data.url), MessageType.image, undefined, undefined, `*here you go ✨*`)
+return void M.reply(await request.buffer(neko.data.url), MessageType.image, undefined, undefined, `*here you go 🖤*`)
 
 
 
