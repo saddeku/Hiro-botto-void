@@ -24,7 +24,7 @@ export default class Command extends BaseCommand {
         const rnekolc = rnekol[Math.floor(Math.random() * rnekol.length)];
         const neko = await axios.get('https://api.waifu.pics/sfw/' + rnekolc)
 
-return void M.reply(await request.buffer(neko.data.url), MessageType.image, undefined, undefined, `*Here you go ✨*`)
+return void M.reply(await request.buffer(neko.data.url), MessageType.image, undefined, undefined, `*Here you go 🖤*`)
 
 
 
