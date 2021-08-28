@@ -18,9 +18,3 @@
 - Written in [TypeScript](https://www.typescriptlang.org/)
 - Self-Resoting Auth
 - Built with [Baileys](https://github.com/adiwajshing/baileys) (The Best WhatsApp Library Out There) 
-
-## 💻 Deploy/Hosting Guide
-- Section Moved to [Void-Guides](https://github.com/Synthesized-Infinity/Void-Guides)
-## 🍥 Features of the Repo
-- To view all features, click here➡️[Void_featuresList.md](https://github.com/PrajjwalDatir/Kaoi/blob/main/Features.md)
-
