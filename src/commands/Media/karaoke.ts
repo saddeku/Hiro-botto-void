@@ -22,7 +22,7 @@ export default class Command extends BaseCommand {
         const term = joined.trim()
         const { videos } = await yts(term + ' karaoke song')
         if (!videos || videos.length <= 0) return void M.reply(`No Matching videos found for the term *${term}*`)
-        const text = `via ✨Star✨`
+        const text = `via 🖤Deku🖤`
 
         this.client
             .sendMessage(M.from, text, MessageType.extendedText, {
@@ -30,7 +30,7 @@ export default class Command extends BaseCommand {
                 contextInfo: {
                     externalAdReply: {
                         title: `Search Term: ${term}`,
-                        body: `✨Made for you✨`,
+                        body: `🖤Made for you🖤`,
                         mediaType: 2,
                         thumbnailUrl: videos[0].thumbnail,
                         mediaUrl: videos[0].url
